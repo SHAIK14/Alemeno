@@ -1,11 +1,12 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 const Signup = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
   const formData = {
     username,
     email,
@@ -23,6 +24,7 @@ const Signup = () => {
       if (response.status === 201) {
         localStorage.setItem("token", response.data.token);
         alert("Account created successfully!");
+        navigate("/login");
       }
     } catch (error) {
       alert(error);
@@ -55,6 +57,12 @@ const Signup = () => {
           placeholder="Password"
         />
         <button type="submit">Sign Up</button>
+        <p className="exists">
+          Already have an account?
+          <Link className="existslink" to="/">
+            Login
+          </Link>
+        </p>
       </form>
     </div>
   );

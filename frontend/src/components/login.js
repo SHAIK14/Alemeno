@@ -1,10 +1,12 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const formData = {
     email,
@@ -27,6 +29,7 @@ const Login = () => {
       );
       if (response.status === 200) {
         alert("Logged in successfully!");
+        navigate("/main");
       }
     } catch (error) {
       alert(error);
@@ -52,6 +55,12 @@ const Login = () => {
           placeholder="Password"
         />
         <button type="submit">Login</button>
+        <p className="exists">
+          Dont have account?
+          <Link className="existslink" to="/signup">
+            signup
+          </Link>
+        </p>
       </form>
     </div>
   );
